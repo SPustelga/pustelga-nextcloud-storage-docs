@@ -6,6 +6,7 @@
 - Disabled the VM bot service after detecting that the VM cannot reach Telegram API.
 - Started the Telegram bot runner on Windows with Startup-folder autostart.
 - Changed the Telegram bot start UI to a long inline action button.
+- Added emoji labels to Telegram bot buttons and save confirmations.
 - Created `/Telegram Uploads` and `/Telegram Notes`.
 - Created a dedicated Nextcloud app password for the Telegram bot.
 - Created `/Joplin` for Joplin WebDAV sync.
