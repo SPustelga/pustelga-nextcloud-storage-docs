@@ -9,6 +9,7 @@
 - Added emoji labels to Telegram bot buttons and save confirmations.
 - Changed GIFs inline button so it sends the latest saved GIFs directly into Telegram.
 - Pointed the GIFs inline button at the root /gifs Nextcloud folder.
+- Rotated GIF button responses so repeated presses send the next batch.
 - Added native Telegram menu commands for start, gifs, and clear.
 - Routed Telegram GIF/animation messages to /Telegram Uploads/GIFs/YYYY-MM-DD/.
 - Created `/Telegram Uploads` and `/Telegram Notes`.

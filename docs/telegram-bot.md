@@ -77,7 +77,7 @@ Source folder for the `🎞 GIFs` button:
 /gifs
 ```
 
-Pressing `🎞 GIFs` sends the latest 5 GIF/animation files from that root folder into Telegram.
+Pressing `🎞 GIFs` sends 5 GIF/animation files from that root folder into Telegram. The bot rotates through the folder, so repeated presses return the next batch instead of the same files. If the folder contents change, the rotation starts again from the newest files.
 
 New Telegram GIF/animation messages sent to the bot are still archived here:
 
