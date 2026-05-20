@@ -2,6 +2,9 @@
 
 ## 2026-05-20
 
+- Created `/Joplin` for Joplin WebDAV sync.
+- Created a dedicated Joplin app password and verified WebDAV read/write/delete.
+- Documented Joplin Desktop/Mobile sync settings and encryption flow.
 - Verified Nextcloud Notes server-side API works with the current app password.
 - Revoked exposed/broken app tokens.
 - Deleted an accidental note that contained an app password.
@@ -22,4 +25,3 @@
 - Deployed qBittorrent in the Nextcloud compose project.
 - Configured qBittorrent downloads to land on the added disk.
 - Added automatic `occ files:scan` timer for the `Torrents` folder.
-

@@ -23,6 +23,7 @@ Secrets currently live outside this repo:
 E:\Codex\NextCloud\nextcloud-mobile-app-password.txt
 E:\Codex\NextCloud\nextcloud-login-qr.png
 E:\Codex\NextCloud\qbittorrent-webui-password.txt
+E:\Codex\NextCloud\joplin-webdav-settings.txt
 E:\Codex\NextCloud\server-config-backup-20260512-073827
 ```
 
@@ -39,4 +40,3 @@ If an app password is pasted into chat, a note, a screenshot, or a repo:
 ## Public Repo Warning
 
 If this documentation is pushed to a public GitHub repository, keep it sanitized. For a private repo, the same rule still applies: secrets should stay in a password manager or local encrypted backup, not in git history.
-

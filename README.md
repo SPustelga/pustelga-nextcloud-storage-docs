@@ -22,6 +22,7 @@ This repository intentionally does not store passwords, app tokens, QR codes, da
 - `docs/storage.md`: disks, mounts, bind mounts, external storage, scan timer.
 - `docs/nextcloud.md`: Docker services, enabled apps, mobile login notes.
 - `docs/torrents.md`: qBittorrent setup and visibility troubleshooting.
+- `docs/joplin.md`: Joplin sync through Nextcloud WebDAV.
 - `docs/operations.md`: common maintenance commands.
 - `docs/security.md`: credential handling and local-only secret locations.
 - `docs/changelog.md`: changes performed during setup.
@@ -35,4 +36,3 @@ docker compose exec -T -u www-data app php occ status
 docker compose exec -T -u www-data app php occ files_external:list --all
 systemctl status nextcloud-scan-torrents.timer
 ```
-
