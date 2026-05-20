@@ -36,6 +36,21 @@ Telegram clients render inline buttons as blue action buttons under the message.
 
 Bot responses use visual prefixes such as `📝`, `🖼`, `📎`, `🎙`, `🎧`, `🎬`, and `🎞` to make saved item confirmations easier to scan.
 
+
+## Native Telegram Menu
+
+The bot has a built-in Telegram menu button configured through Bot API commands:
+
+```text
+/start - 🚀 старт и кнопки
+/gifs  - 🎞 прислать GIFs из /gifs
+/clear - 🧹 очистить чат
+```
+
+The menu button is the native Telegram command menu near the message input field.
+
+`/clear` attempts to delete the recent chat history visible to the bot. Telegram may refuse deleting older messages or messages it has no permission to remove.
+
 ## Nextcloud Paths
 
 Base WebDAV URL:
