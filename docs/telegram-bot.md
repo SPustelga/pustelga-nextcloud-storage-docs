@@ -49,7 +49,7 @@ The bot has a built-in Telegram menu button configured through Bot API commands:
 
 The menu button is the native Telegram command menu near the message input field.
 
-`/clear` attempts to delete the recent chat history visible to the bot. Telegram may refuse deleting older messages or messages it has no permission to remove. The bot handles Telegram HTTP 429 rate limits by waiting for `retry_after` and retrying; chat clearing is capped and throttled to avoid flooding the API.
+`/clear` attempts to delete the recent chat history visible to the bot. Telegram may refuse deleting older messages or messages it has no permission to remove. The bot handles Telegram HTTP 429 rate limits by waiting for `retry_after` and retrying; chat clearing is capped to a small batch and throttled to avoid flooding the API.
 
 ## Nextcloud Paths
 
@@ -77,7 +77,7 @@ Source folder for the `🎞 GIFs` button:
 /gifs
 ```
 
-Pressing `🎞 GIFs` sends 2 GIF/animation files from that root folder into Telegram. The bot rotates through the folder, so repeated presses return the next batch instead of the same files. If the folder contents change, the rotation starts again from the newest files.
+Pressing `🎞 GIFs` sends 1 GIF/animation file from that root folder into Telegram. The bot rotates through the folder, so repeated presses return the next batch instead of the same files. If the folder contents change, the rotation starts again from the newest files.
 
 New Telegram GIF/animation messages sent to the bot are still archived here:
 
