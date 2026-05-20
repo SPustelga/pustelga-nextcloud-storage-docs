@@ -7,6 +7,8 @@
 - Started the Telegram bot runner on Windows with Startup-folder autostart.
 - Changed the Telegram bot start UI to a long inline action button.
 - Added emoji labels to Telegram bot buttons and save confirmations.
+- Added GIFs inline button that opens the Nextcloud GIFs folder.
+- Routed Telegram GIF/animation messages to /Telegram Uploads/GIFs/YYYY-MM-DD/.
 - Created `/Telegram Uploads` and `/Telegram Notes`.
 - Created a dedicated Nextcloud app password for the Telegram bot.
 - Created `/Joplin` for Joplin WebDAV sync.
