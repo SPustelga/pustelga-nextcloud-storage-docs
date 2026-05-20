@@ -3,6 +3,8 @@
 ## 2026-05-20
 
 - Deployed Telegram to Nextcloud WebDAV bot as `telegram-nextcloud-bot.service`.
+- Disabled the VM bot service after detecting that the VM cannot reach Telegram API.
+- Started the Telegram bot runner on Windows with Startup-folder autostart.
 - Created `/Telegram Uploads` and `/Telegram Notes`.
 - Created a dedicated Nextcloud app password for the Telegram bot.
 - Created `/Joplin` for Joplin WebDAV sync.

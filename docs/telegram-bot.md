@@ -47,7 +47,25 @@ Saved uploads:
 /Telegram Uploads/YYYY-MM-DD/*
 ```
 
-## Service
+## Current Runtime
+
+The bot code was first installed on the VM, but the VM could not reach `api.telegram.org` while other sites were reachable. To avoid duplicate Telegram polling, the VM systemd service is currently disabled.
+
+The active bot runner is on the Windows host:
+
+```text
+E:\Codex\NextCloud\run-telegram-nextcloud-bot.ps1
+E:\Codex\NextCloud\telegram_nextcloud_bot.py
+E:\Codex\NextCloud\telegram-nextcloud-bot.windows.log
+```
+
+Autostart is configured through the user's Startup folder:
+
+```text
+C:\Users\vodob\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\TelegramNextcloudBot.cmd
+```
+
+## VM Service
 
 Systemd service:
 
@@ -69,6 +87,13 @@ Environment file:
 
 The env file contains the Telegram bot token and Nextcloud app password, so it must not be committed.
 
+Current VM service state:
+
+```text
+inactive
+disabled
+```
+
 ## Operations
 
 Status:
@@ -89,6 +114,18 @@ Restart:
 sudo systemctl restart telegram-nextcloud-bot.service
 ```
 
+Windows runner log:
+
+```powershell
+Get-Content E:\Codex\NextCloud\telegram-nextcloud-bot.windows.log -Tail 50
+```
+
+Windows runner process:
+
+```powershell
+Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like '*telegram_nextcloud_bot.py*' }
+```
+
 Stop:
 
 ```bash
@@ -99,5 +136,4 @@ sudo systemctl stop telegram-nextcloud-bot.service
 
 The bot accepts messages only from the configured chat ID. Other chats get a short access denied response.
 
-The current Nextcloud app token for the bot is stored only in `/etc/telegram-nextcloud-bot.env`.
-
+The current Nextcloud app token for the bot is stored in local runner configuration only and must not be committed.
