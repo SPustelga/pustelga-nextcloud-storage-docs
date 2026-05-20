@@ -25,7 +25,7 @@ Allowed chat ID:
 8490226851
 ```
 
-Telegram bots cannot initiate a new chat by themselves. The user must open the bot in Telegram and press Start or send `/start` once. After that the bot shows a persistent keyboard with a `Старт` button.
+Telegram bots cannot initiate a new chat by themselves. The user must open the bot in Telegram and press Start or send `/start` once. After that the bot sends a message with a long inline `Start` button. Telegram clients render inline buttons as blue action buttons under the message.
 
 ## Nextcloud Paths
 
