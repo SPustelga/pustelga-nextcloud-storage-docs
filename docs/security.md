@@ -27,6 +27,12 @@ E:\Codex\NextCloud\joplin-webdav-settings.txt
 E:\Codex\NextCloud\server-config-backup-20260512-073827
 ```
 
+Server-side secret file:
+
+```text
+/etc/telegram-nextcloud-bot.env
+```
+
 ## Token Hygiene
 
 If an app password is pasted into chat, a note, a screenshot, or a repo:

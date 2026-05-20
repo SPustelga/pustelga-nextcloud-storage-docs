@@ -23,6 +23,7 @@ This repository intentionally does not store passwords, app tokens, QR codes, da
 - `docs/nextcloud.md`: Docker services, enabled apps, mobile login notes.
 - `docs/torrents.md`: qBittorrent setup and visibility troubleshooting.
 - `docs/joplin.md`: Joplin sync through Nextcloud WebDAV.
+- `docs/telegram-bot.md`: Telegram capture bot that uploads to Nextcloud.
 - `docs/operations.md`: common maintenance commands.
 - `docs/security.md`: credential handling and local-only secret locations.
 - `docs/changelog.md`: changes performed during setup.

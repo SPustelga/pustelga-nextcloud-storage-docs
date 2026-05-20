@@ -2,6 +2,9 @@
 
 ## 2026-05-20
 
+- Deployed Telegram to Nextcloud WebDAV bot as `telegram-nextcloud-bot.service`.
+- Created `/Telegram Uploads` and `/Telegram Notes`.
+- Created a dedicated Nextcloud app password for the Telegram bot.
 - Created `/Joplin` for Joplin WebDAV sync.
 - Created a dedicated Joplin app password and verified WebDAV read/write/delete.
 - Documented Joplin Desktop/Mobile sync settings and encryption flow.
