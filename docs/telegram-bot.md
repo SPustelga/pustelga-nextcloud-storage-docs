@@ -29,10 +29,10 @@ Telegram bots cannot initiate a new chat by themselves. The user must open the b
 
 ```text
 🚀 Старт | сохранять в Nextcloud
-🎞 GIFs | открыть папку в Nextcloud
+🎞 GIFs | прислать в чат
 ```
 
-Telegram clients render inline buttons as blue action buttons under the message. The `GIFs` button opens the Nextcloud web folder and requires the normal Nextcloud login session.
+Telegram clients render inline buttons as blue action buttons under the message. The `GIFs` button sends the latest saved GIF/animation files from Nextcloud directly back into the Telegram chat.
 
 Bot responses use visual prefixes such as `📝`, `🖼`, `📎`, `🎙`, `🎧`, `🎬`, and `🎞` to make saved item confirmations easier to scan.
 
@@ -61,6 +61,8 @@ Saved Telegram GIF/animation messages:
 ```text
 /Telegram Uploads/GIFs/YYYY-MM-DD/*
 ```
+
+Pressing `🎞 GIFs` sends the latest 5 saved GIF/animation files from that folder into Telegram.
 
 ## Current Runtime
 
