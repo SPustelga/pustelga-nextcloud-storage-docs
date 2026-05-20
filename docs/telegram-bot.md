@@ -49,7 +49,7 @@ The bot has a built-in Telegram menu button configured through Bot API commands:
 
 The menu button is the native Telegram command menu near the message input field.
 
-`/clear` attempts to delete the recent chat history visible to the bot. Telegram may refuse deleting older messages or messages it has no permission to remove.
+`/clear` attempts to delete the recent chat history visible to the bot. Telegram may refuse deleting older messages or messages it has no permission to remove. The bot handles Telegram HTTP 429 rate limits by waiting for `retry_after` and retrying; chat clearing is capped and throttled to avoid flooding the API.
 
 ## Nextcloud Paths
 
