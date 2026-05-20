@@ -8,6 +8,7 @@
 - Changed the Telegram bot start UI to a long inline action button.
 - Added emoji labels to Telegram bot buttons and save confirmations.
 - Changed GIFs inline button so it sends the latest saved GIFs directly into Telegram.
+- Pointed the GIFs inline button at the root /gifs Nextcloud folder.
 - Routed Telegram GIF/animation messages to /Telegram Uploads/GIFs/YYYY-MM-DD/.
 - Created `/Telegram Uploads` and `/Telegram Notes`.
 - Created a dedicated Nextcloud app password for the Telegram bot.
