@@ -1,0 +1,11 @@
+# Keep generated/sensitive local material out of git.
+*.log
+*.tmp
+*.env
+*password*
+*token*
+*secret*
+*.key
+*.pem
+server-config-backup-*/
+
