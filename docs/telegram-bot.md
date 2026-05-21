@@ -25,14 +25,18 @@ Allowed chat ID:
 8490226851
 ```
 
-Telegram bots cannot initiate a new chat by themselves. The user must open the bot in Telegram and press Start or send `/start` once. After that the bot sends a message with two inline buttons:
+Telegram bots cannot initiate a new chat by themselves. The user must open the bot in Telegram and press Start or send `/start` once. After that the bot sends one compact row of square inline buttons:
 
 ```text
-🚀 Старт | сохранять в Nextcloud
-🎞 GIFs | прислать из /gifs
+🚀 start
+🎲 random GIF from /gifs
+☑️ show todo-list
+🧹 clear recent chat
 ```
 
-Telegram clients render inline buttons as blue action buttons under the message. The `GIFs` button sends the latest saved GIF/animation files from Nextcloud directly back into the Telegram chat.
+Telegram clients render inline buttons as blue action buttons under the message. The `🎲` button picks one random GIF/animation file from `/gifs` and sends it directly back into the Telegram chat.
+
+The `☑️` button shows the shared todo-list. Sending `todo buy milk` or `туду купить молоко` appends a new unchecked item.
 
 Bot responses use visual prefixes such as `📝`, `🖼`, `📎`, `🎙`, `🎧`, `🎬`, and `🎞` to make saved item confirmations easier to scan.
 
@@ -45,6 +49,7 @@ The bot has a built-in Telegram menu button configured through Bot API commands:
 /start - 🚀 старт и кнопки
 /gifs  - 🎞 прислать GIFs из /gifs
 /clear - 🧹 очистить чат
+/todo  - ☑️ show todo-list
 ```
 
 The menu button is the native Telegram command menu near the message input field.
@@ -71,13 +76,19 @@ Saved uploads:
 /Telegram Uploads/YYYY-MM-DD/*
 ```
 
-Source folder for the `🎞 GIFs` button:
+Source folder for the `🎲` button:
 
 ```text
 /gifs
 ```
 
-Pressing `🎞 GIFs` sends 1 GIF/animation file from that root folder into Telegram. The bot rotates through the folder, so repeated presses return the next batch instead of the same files. If the folder contents change, the rotation starts again from the newest files.
+Pressing `🎲` sends one random GIF/animation file from that folder into Telegram. The bot scans the `/gifs` root plus a small random sample of its subfolders on demand, so newly added files can be picked without restarting the bot while keeping button response time reasonable.
+
+Todo-list file:
+
+```text
+/Telegram Notes/TODO.md
+```
 
 New Telegram GIF/animation messages sent to the bot are still archived here:
 

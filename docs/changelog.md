@@ -10,6 +10,9 @@
 - Changed GIFs inline button so it sends the latest saved GIFs directly into Telegram.
 - Pointed the GIFs inline button at the root /gifs Nextcloud folder.
 - Rotated GIF button responses so repeated presses send the next batch.
+- Changed the GIF button to pick one random item from `/gifs` on every press.
+- Replaced long Telegram inline actions with square emoji buttons.
+- Added a todo-list button and `todo ...` capture into `/Telegram Notes/TODO.md`.
 - Added native Telegram menu commands for start, gifs, and clear.
 - Routed Telegram GIF/animation messages to /Telegram Uploads/GIFs/YYYY-MM-DD/.
 - Created `/Telegram Uploads` and `/Telegram Notes`.
