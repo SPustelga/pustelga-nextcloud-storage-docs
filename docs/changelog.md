@@ -2,6 +2,8 @@
 
 ## 2026-05-20
 
+- Moved the Telegram bot runtime from the Windows host to VPS `163.5.180.88`.
+- Enabled `telegram-nextcloud-bot.service` on the VPS and disabled the old Windows Startup command.
 - Deployed Telegram to Nextcloud WebDAV bot as `telegram-nextcloud-bot.service`.
 - Disabled the VM bot service after detecting that the VM cannot reach Telegram API.
 - Started the Telegram bot runner on Windows with Startup-folder autostart.

@@ -98,23 +98,19 @@ New Telegram GIF/animation messages sent to the bot are still archived here:
 
 ## Current Runtime
 
-The bot code was first installed on the VM, but the VM could not reach `api.telegram.org` while other sites were reachable. To avoid duplicate Telegram polling, the VM systemd service is currently disabled.
-
-The active bot runner is on the Windows host:
+The active bot runner is a systemd service on the VPS:
 
 ```text
-E:\Codex\NextCloud\run-telegram-nextcloud-bot.ps1
-E:\Codex\NextCloud\telegram_nextcloud_bot.py
-E:\Codex\NextCloud\telegram-nextcloud-bot.windows.log
+163.5.180.88
 ```
 
-Autostart is configured through the user's Startup folder:
+The old Windows runner was stopped, and its Startup-folder command was renamed to prevent duplicate Telegram polling on Windows login:
 
 ```text
-C:\Users\vodob\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\TelegramNextcloudBot.cmd
+C:\Users\vodob\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\TelegramNextcloudBot.cmd.disabled
 ```
 
-## VM Service
+## VPS Service
 
 Systemd service:
 
@@ -136,11 +132,11 @@ Environment file:
 
 The env file contains the Telegram bot token and Nextcloud app password, so it must not be committed.
 
-Current VM service state:
+Current VPS service state:
 
 ```text
-inactive
-disabled
+active
+enabled
 ```
 
 ## Operations
@@ -161,18 +157,6 @@ Restart:
 
 ```bash
 sudo systemctl restart telegram-nextcloud-bot.service
-```
-
-Windows runner log:
-
-```powershell
-Get-Content E:\Codex\NextCloud\telegram-nextcloud-bot.windows.log -Tail 50
-```
-
-Windows runner process:
-
-```powershell
-Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like '*telegram_nextcloud_bot.py*' }
 ```
 
 Stop:
