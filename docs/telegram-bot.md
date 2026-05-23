@@ -82,7 +82,7 @@ Source folder for the `🎲` button:
 /gifs
 ```
 
-Pressing `🎲` sends one random GIF/animation file from that folder into Telegram. The bot scans the `/gifs` root plus a small random sample of its subfolders on demand, so newly added files can be picked without restarting the bot while keeping button response time reasonable.
+Pressing `🎲` sends one random GIF/animation file from that folder into Telegram. Every sent GIF includes a `🎲 Хочу еще` button under it, which requests another random GIF. The bot scans the `/gifs` root plus a small random sample of its subfolders on demand, so newly added files can be picked without restarting the bot while keeping button response time reasonable.
 
 Todo-list file:
 
