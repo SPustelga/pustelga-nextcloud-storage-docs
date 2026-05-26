@@ -70,6 +70,16 @@ Saved text notes:
 /Telegram Notes/YYYY-MM-DD/*.md
 ```
 
+Every normal text message is also queued for Joplin and then imported into the Joplin notebook `Telegram` by the Windows bridge.
+
+Joplin queue:
+
+```text
+/Telegram Joplin Queue/pending/*.json
+/Telegram Joplin Queue/done/*.json
+/Telegram Joplin Queue/failed/*.json
+```
+
 Saved uploads:
 
 ```text
@@ -108,6 +118,15 @@ The old Windows runner was stopped, and its Startup-folder command was renamed t
 
 ```text
 C:\Users\vodob\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\TelegramNextcloudBot.cmd.disabled
+```
+
+The Joplin bridge runs on the Windows host because Joplin Desktop exposes its REST API only on localhost:
+
+```text
+E:\Codex\NextCloud\run-joplin-nextcloud-bridge.ps1
+E:\Codex\NextCloud\joplin_nextcloud_bridge.py
+E:\Codex\NextCloud\joplin-nextcloud-bridge.windows.log
+C:\Users\vodob\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\JoplinNextcloudBridge.cmd
 ```
 
 ## VPS Service
