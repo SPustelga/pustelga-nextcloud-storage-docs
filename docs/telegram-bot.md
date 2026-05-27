@@ -36,7 +36,7 @@ Telegram bots cannot initiate a new chat by themselves. The user must open the b
 
 Telegram clients render inline buttons as blue action buttons under the message. The `🎲` button picks one random GIF/animation file from `/gifs` and sends it directly back into the Telegram chat.
 
-The `☑️` button shows the shared todo-list. Sending `todo buy milk` or `туду купить молоко` appends a new unchecked item.
+The `☑️` button shows the shared todo-list. Sending `todo buy milk` or `туду купить молоко` appends a new unchecked item and queues a real Joplin todo in the `Telegram` notebook.
 
 Bot responses use visual prefixes such as `📝`, `🖼`, `📎`, `🎙`, `🎧`, `🎬`, and `🎞` to make saved item confirmations easier to scan.
 
@@ -70,7 +70,7 @@ Saved text notes:
 /Telegram Notes/YYYY-MM-DD/*.md
 ```
 
-Every normal text message is also queued for Joplin and then imported into the Joplin notebook `Telegram` by the Windows bridge.
+Every normal text message is also queued for Joplin and then imported into the Joplin notebook `Telegram` by the Windows bridge. Todo messages are queued as Joplin todo items with `is_todo=1`.
 
 Joplin queue:
 

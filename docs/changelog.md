@@ -6,6 +6,7 @@
 - Enabled `telegram-nextcloud-bot.service` on the VPS and disabled the old Windows Startup command.
 - Enabled Joplin Web Clipper API on Windows and created the Joplin notebook `Telegram`.
 - Added a Windows Nextcloud-to-Joplin bridge for Telegram text notes.
+- Extended the Joplin bridge so Telegram `todo ...` messages create real Joplin todo items.
 - Deployed Telegram to Nextcloud WebDAV bot as `telegram-nextcloud-bot.service`.
 - Disabled the VM bot service after detecting that the VM cannot reach Telegram API.
 - Started the Telegram bot runner on Windows with Startup-folder autostart.
