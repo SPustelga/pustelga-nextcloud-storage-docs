@@ -4,6 +4,8 @@
 
 - Moved the Telegram bot runtime from the Windows host to VPS `163.5.180.88`.
 - Enabled `telegram-nextcloud-bot.service` on the VPS and disabled the old Windows Startup command.
+- Created the Nextcloud admin user `kovarsky` and shared the main `pustelga` folders to it with full permissions.
+- Updated the Joplin bridge to auto-start Joplin Desktop when the local API is unavailable.
 - Enabled Joplin Web Clipper API on Windows and created the Joplin notebook `Telegram`.
 - Added a Windows Nextcloud-to-Joplin bridge for Telegram text notes.
 - Extended the Joplin bridge so Telegram `todo ...` messages create real Joplin todo items.

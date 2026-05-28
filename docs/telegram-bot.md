@@ -129,6 +129,12 @@ E:\Codex\NextCloud\joplin-nextcloud-bridge.windows.log
 C:\Users\vodob\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\JoplinNextcloudBridge.cmd
 ```
 
+The bridge now checks `http://127.0.0.1:41184/ping` before processing the queue. If Joplin Desktop is not running, it starts:
+
+```text
+C:\Users\vodob\AppData\Local\Programs\Joplin\Joplin.exe
+```
+
 ## VPS Service
 
 Systemd service:

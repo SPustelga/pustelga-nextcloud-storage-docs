@@ -20,6 +20,31 @@ Primary Nextcloud user:
 pustelga
 ```
 
+Additional admin user:
+
+```text
+kovarsky
+```
+
+`kovarsky` is in the `admin` group, has unlimited quota, and has full-permission shares from `pustelga` for the main top-level folders so they appear in the Files app.
+
+Shared folders:
+
+```text
+Camera Uploads
+gifs
+Joplin
+Mail.ru
+Photos
+Share
+Telegram Joplin Queue
+Telegram Notes
+Telegram Uploads
+Torrents
+Yandex
+Заметки
+```
+
 ## Services
 
 Current compose services:
@@ -83,4 +108,3 @@ E:\Codex\NextCloud\nextcloud-login-qr.png
 ```
 
 These files are intentionally not included in this repository.
-
