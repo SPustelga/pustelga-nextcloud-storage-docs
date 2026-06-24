@@ -14,6 +14,12 @@ Public URL:
 https://nextcloud.pustelga.xyz
 ```
 
+VM LAN address:
+
+```text
+192.168.1.42
+```
+
 Primary Nextcloud user:
 
 ```text
@@ -28,7 +34,7 @@ kovarsky
 
 `kovarsky` is in the `admin` group, has unlimited quota, and has full-permission shares from `pustelga` for the main top-level folders so they appear in the Files app.
 
-Shared folders:
+Shared folders include:
 
 ```text
 Camera Uploads
@@ -68,6 +74,8 @@ Published ports:
 
 ## Version
 
+Last documented version:
+
 ```text
 Nextcloud 31.0.14
 maintenance: false
@@ -85,9 +93,42 @@ photos: 4.0.0
 tasks: 0.17.1
 ```
 
+## Important User Folders
+
+Large folders backed by the added 2 TB disk:
+
+```text
+/Torrents
+/Yandex
+/gifs
+```
+
+GIF library last verified after scan on `2026-06-15`:
+
+```text
+/gifs
+files: 111801
+size: 282G
+scan errors: 0
+```
+
+Joplin sync folder:
+
+```text
+/Joplin
+```
+
+Telegram capture folders:
+
+```text
+/Telegram Notes
+/Telegram Uploads
+/Telegram Joplin Queue
+```
+
 ## Notes And Tasks
 
-Notes API was verified with the current app password:
+Notes API was verified with a dedicated app password:
 
 ```text
 Notes API: 200
@@ -108,3 +149,16 @@ E:\Codex\NextCloud\nextcloud-login-qr.png
 ```
 
 These files are intentionally not included in this repository.
+
+## Availability Note
+
+As of `2026-06-24`, the documentation was updated while the Nextcloud host was not reachable from the current workstation or the VPS:
+
+```text
+ping 192.168.1.42: timeout
+ssh sb@192.168.1.42: timeout
+https://nextcloud.pustelga.xyz/status.php: timeout from workstation
+VPS curl https://nextcloud.pustelga.xyz/status.php: connect timeout / no route
+```
+
+This is an infrastructure/network availability issue, not an empty `/gifs` folder issue. Restore VM/network/public route first, then recheck WebDAV and bot functions.
