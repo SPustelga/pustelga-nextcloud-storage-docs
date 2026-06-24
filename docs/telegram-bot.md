@@ -9,7 +9,9 @@ It is intended for quick capture:
 - text messages become Markdown files;
 - photos and documents become files;
 - captions are saved next to uploads as Markdown;
-- voice, audio, and video messages are stored as files.
+- voice, audio, and video messages are stored as files;
+- plain text messages are also queued for import into Joplin;
+- todo captures create Joplin todo items.
 
 ## Telegram
 
@@ -25,36 +27,46 @@ Allowed chat ID:
 8490226851
 ```
 
-Telegram bots cannot initiate a new chat by themselves. The user must open the bot in Telegram and press Start or send `/start` once. After that the bot sends one compact row of square inline buttons:
+Telegram bots cannot initiate a new chat by themselves. The user must open the bot in Telegram and press Start or send `/start` once.
+
+## Inline Buttons
+
+The bot uses wide inline buttons under bot messages, not a persistent reply keyboard in the message input area.
+
+Main menu buttons:
 
 ```text
-🚀 start
-🎲 random GIF from /gifs
-☑️ capture next message as todo
-🧹 clear recent chat
+🚀 Старт / сохранить файлы
+🎲 Случайная GIF
+☑️ Todo-list
+🧹 Очистить чат
 ```
 
-Telegram clients render inline buttons as blue action buttons under the message. The `🎲` button picks one random GIF/animation file from `/gifs` and sends it directly back into the Telegram chat.
+The `🎲` button picks one random GIF/animation file from `/gifs` and sends it directly back into the Telegram chat.
+
+Every sent GIF includes:
+
+```text
+🎲 Хочу еще GIF
+🏠 Главное меню
+```
 
 The `☑️` button switches the bot into todo capture mode. After pressing it, the next plain text message is saved as a todo without requiring a `todo` prefix. Sending `todo buy milk` or `туду купить молоко` still works too.
 
 Bot responses use visual prefixes such as `📝`, `🖼`, `📎`, `🎙`, `🎧`, `🎬`, and `🎞` to make saved item confirmations easier to scan.
 
-
 ## Native Telegram Menu
 
-The bot has a built-in Telegram menu button configured through Bot API commands:
+The native Telegram menu button near the attachment/paperclip area was removed by clearing bot commands and resetting the chat menu button to `default`:
 
 ```text
-/start - 🚀 старт и кнопки
-/gifs  - 🎞 прислать GIFs из /gifs
-/clear - 🧹 очистить чат
-/todo  - ☑️ show todo-list
+deleteMyCommands()
+deleteMyCommands(scope=all_private_chats)
+deleteMyCommands(scope=chat)
+setChatMenuButton(type=default)
 ```
 
-The menu button is the native Telegram command menu near the message input field.
-
-`/clear` attempts to delete the recent chat history visible to the bot. Telegram may refuse deleting older messages or messages it has no permission to remove. The bot handles Telegram HTTP 429 rate limits by waiting for `retry_after` and retrying; chat clearing is capped to a small batch and throttled to avoid flooding the API.
+Telegram clients may cache that UI briefly. Reopen the chat if the old menu icon is still visible.
 
 ## Nextcloud Paths
 
@@ -92,7 +104,16 @@ Source folder for the `🎲` button:
 /gifs
 ```
 
-Pressing `🎲` sends one random GIF/animation file from that folder into Telegram. Every sent GIF includes a `🎲 Хочу еще` button under it, which requests another random GIF. The bot scans the `/gifs` root plus a small random sample of its subfolders on demand, so newly added files can be picked without restarting the bot while keeping button response time reasonable.
+The `/gifs` library is nested. The bot now walks nested folders recursively with a bounded random search rather than checking only the top-level folder. Supported media extensions:
+
+```text
+.gif
+.mp4
+.webm
+.mov
+```
+
+If WebDAV is unreachable, the bot reports a connectivity error instead of incorrectly saying `/gifs` is empty.
 
 Todo-list file:
 
@@ -100,7 +121,7 @@ Todo-list file:
 /Telegram Notes/TODO.md
 ```
 
-New Telegram GIF/animation messages sent to the bot are still archived here:
+New Telegram GIF/animation messages sent to the bot are archived here:
 
 ```text
 /Telegram Uploads/GIFs/YYYY-MM-DD/*
@@ -113,29 +134,6 @@ The active bot runner is a systemd service on the VPS:
 ```text
 163.5.180.88
 ```
-
-The old Windows runner was stopped, and its Startup-folder command was renamed to prevent duplicate Telegram polling on Windows login:
-
-```text
-C:\Users\vodob\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\TelegramNextcloudBot.cmd.disabled
-```
-
-The Joplin bridge runs on the Windows host because Joplin Desktop exposes its REST API only on localhost:
-
-```text
-E:\Codex\NextCloud\run-joplin-nextcloud-bridge.ps1
-E:\Codex\NextCloud\joplin_nextcloud_bridge.py
-E:\Codex\NextCloud\joplin-nextcloud-bridge.windows.log
-C:\Users\vodob\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\JoplinNextcloudBridge.cmd
-```
-
-The bridge now checks `http://127.0.0.1:41184/ping` before processing the queue. If Joplin Desktop is not running, it starts:
-
-```text
-C:\Users\vodob\AppData\Local\Programs\Joplin\Joplin.exe
-```
-
-## VPS Service
 
 Systemd service:
 
@@ -157,11 +155,27 @@ Environment file:
 
 The env file contains the Telegram bot token and Nextcloud app password, so it must not be committed.
 
-Current VPS service state:
+Current VPS service state after the `2026-06-24` deploy:
 
 ```text
 active
-enabled
+```
+
+## Windows Joplin Bridge
+
+The Joplin bridge runs on the Windows host because Joplin Desktop exposes its REST API only on localhost:
+
+```text
+E:\Codex\NextCloud\run-joplin-nextcloud-bridge.ps1
+E:\Codex\NextCloud\joplin_nextcloud_bridge.py
+E:\Codex\NextCloud\joplin-nextcloud-bridge.windows.log
+C:\Users\vodob\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\JoplinNextcloudBridge.lnk
+```
+
+The bridge checks `http://127.0.0.1:41184/ping` before processing the queue. If Joplin Desktop is not running, it starts:
+
+```text
+C:\Users\vodob\AppData\Local\Programs\Joplin\Joplin.exe
 ```
 
 ## Operations
@@ -190,8 +204,27 @@ Stop:
 sudo systemctl stop telegram-nextcloud-bot.service
 ```
 
+## Known Network Issue
+
+As of `2026-06-24`, the bot service is active, but the VPS cannot reach Nextcloud over the configured public URL:
+
+```text
+VPS DNS: nextcloud.pustelga.xyz -> 84.201.247.104
+VPS curl https://nextcloud.pustelga.xyz/status.php: connect timeout / no route
+Bot log symptom: No route to host
+```
+
+The Windows workstation also could not reach:
+
+```text
+192.168.1.42 ping/SSH: timeout
+https://nextcloud.pustelga.xyz/status.php: timeout
+```
+
+Until the VM/network/public route is restored, bot features that read or write Nextcloud over WebDAV cannot work reliably.
+
 ## Security
 
 The bot accepts messages only from the configured chat ID. Other chats get a short access denied response.
 
-The current Nextcloud app token for the bot is stored in local runner configuration only and must not be committed.
+The current Nextcloud app token for the bot is stored in local runner configuration and `/etc/telegram-nextcloud-bot.env` only. It must not be committed.
