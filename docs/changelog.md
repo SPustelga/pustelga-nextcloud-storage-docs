@@ -10,6 +10,13 @@
 - Verified Memos returned HTTP `200`.
 - Recorded pre-transfer state for the next local GIF batch from `E:\Codex\NextCloud\gifs`: `63402` files, about `168.1G`.
 - Updated Telegram bot documentation to reflect the native commands menu plus persistent reply keyboard.
+- Transferred the local GIF batch from `E:\Codex\NextCloud\gifs` into Nextcloud `/gifs`.
+- Verified `63566` local files against final `/gifs` by relative path and file size; missing files: `0`.
+- Ran `occ files:scan --path='pustelga/files/gifs'`; scan completed with `Errors 0` and `64451` updated files.
+- Verified final `/gifs` state: `175367` files, about `439G`.
+- Deleted `63566` verified local files from `E:\Codex\NextCloud\gifs`; local files remaining: `0`.
+- Removed server staging `/mnt/nextcloud-extra/nextcloud-data/gifs-upload-20260630` and ran `fstrim`.
+- Verified the 2 TB disk after cleanup: `/dev/sdb1` about `801G` used and `1.1T` free.
 
 ## 2026-06-24
 

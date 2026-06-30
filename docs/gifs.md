@@ -19,28 +19,34 @@ The folder is backed by the added 2 TB disk through a bind mount:
 
 ## Current State
 
-Last verified after the `2026-06-15` transfer:
+Last verified after the `2026-06-30` transfer:
 
 ```text
-Files: 111801
-Size: 282G
+Files: 175367
+Size: 439G
 Nextcloud scan: Errors 0
-WebDAV /gifs: HTTP 207
 ```
 
 Disk state after staging cleanup:
 
 ```text
-/dev/sdb1  2.0T  644G used  1.2T free  35%  /mnt/nextcloud-extra
+/dev/sdb1  2.0T  801G used  1.1T free  43%  /mnt/nextcloud-extra
 ```
 
-Pre-transfer state checked on `2026-06-30` before the next local cleanup:
+Completed `2026-06-30` local batch:
 
 ```text
-Server /gifs files: 111801
-Server /gifs size: 282G
-Local source E:\Codex\NextCloud\gifs files: 63402
-Local source size: about 168.1G
+Local source: E:\Codex\NextCloud\gifs
+Local files verified against final /gifs: 63566
+Local source size: 168493159097 bytes
+Final /gifs files after scan: 175367
+Final /gifs size after scan: 439G
+Nextcloud scan updated files: 64451
+Nextcloud scan errors: 0
+Deleted verified local files: 63566
+Local files remaining: 0
+Server staging removed: /mnt/nextcloud-extra/nextcloud-data/gifs-upload-20260630
+fstrim: completed
 ```
 
 ## Local Source Folder
@@ -138,4 +144,4 @@ Freed: about 117.06G
 Local folder removed because it became empty: E:\Codex\NextCloud\gifs
 ```
 
-For the `2026-06-30` batch, use the same rule: delete only after the relative path verification reports no missing files and after the targeted Nextcloud scan completes.
+The `2026-06-30` cleanup followed the same rule. Local files were deleted only after every local relative path and size was confirmed present in final `/gifs` and after `occ files:scan --path='pustelga/files/gifs'` completed with `Errors 0`.

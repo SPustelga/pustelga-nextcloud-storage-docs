@@ -50,6 +50,7 @@ As of `2026-06-30`:
 https://nextcloud.pustelga.xyz/status.php: HTTP 200
 http://192.168.1.42:5230: HTTP 200 for Memos
 /gifs physical path: /opt/nextcloud/data/pustelga/files/gifs
+/gifs verified state: 175367 files, about 439G, scan Errors 0
 ```
 
 `memos.pustelga.xyz` DNS is not configured yet. Until DNS and Caddy are updated, Memos is LAN-only at `http://192.168.1.42:5230`.
