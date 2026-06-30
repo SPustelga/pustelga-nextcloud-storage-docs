@@ -24,7 +24,33 @@ sudo docker compose ps
 sudo docker compose logs --tail=200 app
 sudo docker compose logs --tail=200 qbittorrent
 sudo docker compose logs --tail=200 caddy
+sudo docker compose logs --tail=200 memos
 ```
+
+## Memos
+
+Memos is LAN-only until DNS/Caddy are configured:
+
+```text
+http://192.168.1.42:5230
+```
+
+Common checks:
+
+```bash
+cd /opt/nextcloud
+sudo docker compose ps memos
+sudo docker compose logs --tail=80 memos
+curl -I http://192.168.1.42:5230/
+```
+
+Data directory:
+
+```text
+/opt/nextcloud/memos
+```
+
+Back up this directory before Memos upgrades.
 
 ## Nextcloud OCC
 

@@ -16,12 +16,14 @@ This repository intentionally does not store passwords, app tokens, QR codes, da
 - Large GIF library path: `/opt/nextcloud/data/pustelga/files/gifs`
 - Torrent folder in Nextcloud: `/Torrents`
 - Joplin sync folder in Nextcloud: `/Joplin`
+- Memos LAN URL: `http://192.168.1.42:5230`
 
 ## What Is Documented
 
 - `docs/storage.md`: disks, mounts, bind mounts, external storage, scan commands.
 - `docs/gifs.md`: `/gifs` library, transfer procedure, scan/verification notes.
 - `docs/nextcloud.md`: Docker services, enabled apps, mobile login notes.
+- `docs/memos.md`: Memos deployment on the Nextcloud VM.
 - `docs/torrents.md`: qBittorrent setup and visibility troubleshooting.
 - `docs/joplin.md`: Joplin sync and Telegram-to-Joplin bridge.
 - `docs/telegram-bot.md`: Telegram capture bot that uploads to Nextcloud and sends GIFs.
@@ -40,14 +42,14 @@ docker compose exec -T -u www-data app php occ files_external:list --all
 systemctl status telegram-nextcloud-bot.service --no-pager -l
 ```
 
-## Known Availability Note
+## Current Availability
 
-As of `2026-06-24`, the Telegram bot code was updated, but the Nextcloud host was not reachable from the VPS or the Windows workstation:
+As of `2026-06-30`:
 
 ```text
-192.168.1.42 ping/SSH: timeout
-https://nextcloud.pustelga.xyz/status.php: timeout from workstation
-VPS -> nextcloud.pustelga.xyz: No route to host / connect timeout
+https://nextcloud.pustelga.xyz/status.php: HTTP 200
+http://192.168.1.42:5230: HTTP 200 for Memos
+/gifs physical path: /opt/nextcloud/data/pustelga/files/gifs
 ```
 
-When this happens, bot features that read Nextcloud over WebDAV, including the random GIF button, cannot work until the VM/network/public route is restored.
+`memos.pustelga.xyz` DNS is not configured yet. Until DNS and Caddy are updated, Memos is LAN-only at `http://192.168.1.42:5230`.

@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-06-30
+
+- Documented Memos deployment on the Nextcloud VM.
+- Memos runs as `nextcloud-memos-1` from `/opt/nextcloud` using `neosmemo/memos:stable`.
+- Memos data is stored in `/opt/nextcloud/memos`.
+- Memos is currently LAN-only at `http://192.168.1.42:5230`; DNS for `memos.pustelga.xyz` is not configured yet.
+- Verified Nextcloud status endpoint returned HTTP `200`.
+- Verified Memos returned HTTP `200`.
+- Recorded pre-transfer state for the next local GIF batch from `E:\Codex\NextCloud\gifs`: `63402` files, about `168.1G`.
+- Updated Telegram bot documentation to reflect the native commands menu plus persistent reply keyboard.
+
 ## 2026-06-24
 
 - Updated Telegram bot UI to use wide inline buttons under messages.

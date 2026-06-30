@@ -34,6 +34,15 @@ Disk state after staging cleanup:
 /dev/sdb1  2.0T  644G used  1.2T free  35%  /mnt/nextcloud-extra
 ```
 
+Pre-transfer state checked on `2026-06-30` before the next local cleanup:
+
+```text
+Server /gifs files: 111801
+Server /gifs size: 282G
+Local source E:\Codex\NextCloud\gifs files: 63402
+Local source size: about 168.1G
+```
+
 ## Local Source Folder
 
 Transfers have used this Windows source folder:
@@ -128,3 +137,5 @@ Deleted local files: 49133
 Freed: about 117.06G
 Local folder removed because it became empty: E:\Codex\NextCloud\gifs
 ```
+
+For the `2026-06-30` batch, use the same rule: delete only after the relative path verification reports no missing files and after the targeted Nextcloud scan completes.

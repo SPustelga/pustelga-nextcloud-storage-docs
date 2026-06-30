@@ -29,20 +29,23 @@ Allowed chat ID:
 
 Telegram bots cannot initiate a new chat by themselves. The user must open the bot in Telegram and press Start or send `/start` once.
 
-## Inline Buttons
+## Buttons
 
-The bot uses wide inline buttons under bot messages, not a persistent reply keyboard in the message input area.
+The bot has two button surfaces:
 
-Main menu buttons:
+- a native Telegram command menu with `/start`, `/gif`, `/todo`, and `/clear`;
+- a persistent reply keyboard near the message input area with the main actions.
+
+Persistent reply keyboard:
 
 ```text
-🚀 Старт / сохранить файлы
-🎲 Случайная GIF
-☑️ Todo-list
-🧹 Очистить чат
+🚀 Старт
+🎲 GIF
+☑️ Todo
+🧹 Очистить
 ```
 
-The `🎲` button picks one random GIF/animation file from `/gifs` and sends it directly back into the Telegram chat.
+The `🎲 GIF` button picks one random GIF/animation file from `/gifs` and sends it directly back into the Telegram chat.
 
 Every sent GIF includes:
 
@@ -51,22 +54,22 @@ Every sent GIF includes:
 🏠 Главное меню
 ```
 
-The `☑️` button switches the bot into todo capture mode. After pressing it, the next plain text message is saved as a todo without requiring a `todo` prefix. Sending `todo buy milk` or `туду купить молоко` still works too.
+The `☑️ Todo` button switches the bot into todo capture mode. After pressing it, the next plain text message is saved as a todo without requiring a `todo` prefix. Sending `todo buy milk` or `туду купить молоко` still works too.
 
 Bot responses use visual prefixes such as `📝`, `🖼`, `📎`, `🎙`, `🎧`, `🎬`, and `🎞` to make saved item confirmations easier to scan.
 
 ## Native Telegram Menu
 
-The native Telegram menu button near the attachment/paperclip area was removed by clearing bot commands and resetting the chat menu button to `default`:
+The native Telegram menu button is enabled and uses bot commands:
 
 ```text
-deleteMyCommands()
-deleteMyCommands(scope=all_private_chats)
-deleteMyCommands(scope=chat)
-setChatMenuButton(type=default)
+/start - show buttons
+/gif - random GIF
+/todo - add todo
+/clear - clear recent bot chat messages where Telegram allows it
 ```
 
-Telegram clients may cache that UI briefly. Reopen the chat if the old menu icon is still visible.
+Telegram clients may cache the button/menu briefly. Reopen the chat or restart the Telegram client if the menu state looks stale.
 
 ## Nextcloud Paths
 

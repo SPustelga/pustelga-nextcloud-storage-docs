@@ -60,6 +60,7 @@ nextcloud-app-1           app
 nextcloud-caddy-1         caddy
 nextcloud-cron-1          cron
 nextcloud-db-1            db
+nextcloud-memos-1         memos
 nextcloud-qbittorrent-1   qbittorrent
 nextcloud-redis-1         redis
 ```
@@ -70,7 +71,26 @@ Published ports:
 80/tcp and 443/tcp via Caddy
 6881/tcp and 6881/udp for qBittorrent
 192.168.1.42:8080/tcp for qBittorrent Web UI
+192.168.1.42:5230/tcp for Memos
 ```
+
+## Memos
+
+Memos is deployed on the same VM as a separate Docker Compose service.
+
+Current LAN URL:
+
+```text
+http://192.168.1.42:5230
+```
+
+Data path:
+
+```text
+/opt/nextcloud/memos
+```
+
+Public DNS for `memos.pustelga.xyz` is not configured yet, so Memos is currently LAN-only.
 
 ## Version
 
