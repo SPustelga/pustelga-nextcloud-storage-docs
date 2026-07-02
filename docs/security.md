@@ -33,6 +33,8 @@ Server-side secret file:
 /etc/telegram-nextcloud-bot.env
 ```
 
+This file contains the Telegram bot token, Nextcloud app password, and Memos personal access token. Keep it out of git and out of screenshots.
+
 ## Token Hygiene
 
 If an app password is pasted into chat, a note, a screenshot, or a repo:

@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-07-02
+
+- Published Memos at `https://memos.pustelga.xyz` through Caddy on the Nextcloud VM.
+- Verified DNS `memos.pustelga.xyz -> 84.201.247.104`.
+- Confirmed router forwarding already sends public `80/443` traffic to the Nextcloud VM; port `5230` remains LAN-only.
+- Validated the Caddy config and confirmed HTTPS returns HTTP `200`.
+- Created a Memos personal access token for the Telegram bot integration; the token is stored only in `/etc/telegram-nextcloud-bot.env` on the VPS.
+- Updated the Telegram bot with a `📝 Memo` button and Memos API capture.
+- Changed normal Telegram text capture to create both a Nextcloud Markdown note and a Memos memo.
+- Changed todo capture to update the existing Nextcloud/Joplin todo flow and also create a Memos Markdown checkbox memo.
+- Changed photo/file/media capture to upload the file to Nextcloud and create a Memos memo with the saved Nextcloud path.
+- Extended GIF inline buttons with `📝 Memo` and `☑️ Todo`.
+- Deployed `/opt/telegram-nextcloud-bot/bot.py`, passed `python3 -m py_compile`, restarted `telegram-nextcloud-bot.service`, and verified the service is active.
+- Smoke-tested Memos auth, temporary memo create/delete, and Telegram menu message delivery.
+
 ## 2026-06-30
 
 - Documented Memos deployment on the Nextcloud VM.

@@ -10,6 +10,7 @@ It is intended for quick capture:
 - photos and documents become files;
 - captions are saved next to uploads as Markdown;
 - voice, audio, and video messages are stored as files;
+- text, todos, photos, and files are also captured into Memos;
 - plain text messages are also queued for import into Joplin;
 - todo captures create Joplin todo items.
 
@@ -39,10 +40,9 @@ The bot has two button surfaces:
 Persistent reply keyboard:
 
 ```text
+📝 Memo   ☑️ Todo
+🎲 GIF    🧹 Очистить
 🚀 Старт
-🎲 GIF
-☑️ Todo
-🧹 Очистить
 ```
 
 The `🎲 GIF` button picks one random GIF/animation file from `/gifs` and sends it directly back into the Telegram chat.
@@ -51,8 +51,12 @@ Every sent GIF includes:
 
 ```text
 🎲 Хочу еще GIF
+📝 Memo
+☑️ Todo
 🏠 Главное меню
 ```
+
+The `📝 Memo` button switches the bot into memo capture mode. After pressing it, the next plain text message is saved to Nextcloud and Memos with memo tags.
 
 The `☑️ Todo` button switches the bot into todo capture mode. After pressing it, the next plain text message is saved as a todo without requiring a `todo` prefix. Sending `todo buy milk` or `туду купить молоко` still works too.
 
@@ -86,6 +90,21 @@ Saved text notes:
 ```
 
 Every normal text message is also queued for Joplin and then imported into the Joplin notebook `Telegram` by the Windows bridge. Todo messages, including messages captured after pressing `☑️`, are queued as Joplin todo items with `is_todo=1`.
+
+Memos capture:
+
+```text
+text -> Memos memo with #telegram #inbox
+Memo button text -> Memos memo with #telegram #memo
+Todo button text -> Memos memo with #telegram #todo and Markdown checkbox
+photo/file/media -> Memos memo with the saved Nextcloud path
+```
+
+Memos API base:
+
+```text
+https://memos.pustelga.xyz/api/v1
+```
 
 Joplin queue:
 
@@ -156,9 +175,17 @@ Environment file:
 /etc/telegram-nextcloud-bot.env
 ```
 
-The env file contains the Telegram bot token and Nextcloud app password, so it must not be committed.
+The env file contains the Telegram bot token, Nextcloud app password, and Memos personal access token, so it must not be committed.
 
-Current VPS service state after the `2026-06-24` deploy:
+Memos-related env variables:
+
+```text
+MEMOS_BASE_URL=https://memos.pustelga.xyz
+MEMOS_TOKEN=redacted
+MEMOS_VISIBILITY=PRIVATE
+```
+
+Current VPS service state after the `2026-07-02` deploy:
 
 ```text
 active
@@ -207,24 +234,17 @@ Stop:
 sudo systemctl stop telegram-nextcloud-bot.service
 ```
 
-## Known Network Issue
+## Current Health
 
-As of `2026-06-24`, the bot service is active, but the VPS cannot reach Nextcloud over the configured public URL:
-
-```text
-VPS DNS: nextcloud.pustelga.xyz -> 84.201.247.104
-VPS curl https://nextcloud.pustelga.xyz/status.php: connect timeout / no route
-Bot log symptom: No route to host
-```
-
-The Windows workstation also could not reach:
+After the `2026-07-02` deploy:
 
 ```text
-192.168.1.42 ping/SSH: timeout
-https://nextcloud.pustelga.xyz/status.php: timeout
+telegram-nextcloud-bot.service: active
+bot Python compile check: ok
+Memos auth check: HTTP 200
+temporary Memos memo create/delete: HTTP 200
+Telegram menu message delivery: ok
 ```
-
-Until the VM/network/public route is restored, bot features that read or write Nextcloud over WebDAV cannot work reliably.
 
 ## Security
 

@@ -17,6 +17,8 @@ This repository intentionally does not store passwords, app tokens, QR codes, da
 - Torrent folder in Nextcloud: `/Torrents`
 - Joplin sync folder in Nextcloud: `/Joplin`
 - Memos LAN URL: `http://192.168.1.42:5230`
+- Public Memos URL: `https://memos.pustelga.xyz`
+- Telegram bot: Nextcloud uploads plus Memos quick capture
 
 ## What Is Documented
 
@@ -44,13 +46,14 @@ systemctl status telegram-nextcloud-bot.service --no-pager -l
 
 ## Current Availability
 
-As of `2026-06-30`:
+As of `2026-07-02`:
 
 ```text
 https://nextcloud.pustelga.xyz/status.php: HTTP 200
+https://memos.pustelga.xyz/: HTTP 200
 http://192.168.1.42:5230: HTTP 200 for Memos
 /gifs physical path: /opt/nextcloud/data/pustelga/files/gifs
 /gifs verified state: 175367 files, about 439G, scan Errors 0
 ```
 
-`memos.pustelga.xyz` DNS is not configured yet. Until DNS and Caddy are updated, Memos is LAN-only at `http://192.168.1.42:5230`.
+`memos.pustelga.xyz` is published through Caddy on the Nextcloud VM. Router forwarding stays limited to public HTTP/HTTPS; Memos port `5230` is not forwarded directly.

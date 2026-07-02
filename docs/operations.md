@@ -29,7 +29,13 @@ sudo docker compose logs --tail=200 memos
 
 ## Memos
 
-Memos is LAN-only until DNS/Caddy are configured:
+Public URL:
+
+```text
+https://memos.pustelga.xyz
+```
+
+LAN URL:
 
 ```text
 http://192.168.1.42:5230
@@ -42,6 +48,9 @@ cd /opt/nextcloud
 sudo docker compose ps memos
 sudo docker compose logs --tail=80 memos
 curl -I http://192.168.1.42:5230/
+curl -I https://memos.pustelga.xyz/
+sudo docker compose exec -T caddy caddy validate --config /etc/caddy/Caddyfile
+sudo docker compose logs --tail=80 caddy
 ```
 
 Data directory:
@@ -180,6 +189,22 @@ Restart after deploying `/opt/telegram-nextcloud-bot/bot.py`:
 sudo python3 -m py_compile /opt/telegram-nextcloud-bot/bot.py
 sudo systemctl restart telegram-nextcloud-bot.service
 systemctl is-active telegram-nextcloud-bot.service
+```
+
+The bot env file also contains the Memos API settings:
+
+```text
+MEMOS_BASE_URL=https://memos.pustelga.xyz
+MEMOS_TOKEN=redacted
+MEMOS_VISIBILITY=PRIVATE
+```
+
+Memos smoke test from the VPS:
+
+```bash
+source /etc/telegram-nextcloud-bot.env
+curl -sS -H "Authorization: Bearer $MEMOS_TOKEN" \
+  "$MEMOS_BASE_URL/api/v1/auth/me"
 ```
 
 ## Joplin Bridge

@@ -10,7 +10,7 @@ It is intended as a possible replacement for the Joplin capture flow:
 - Markdown-style quick capture;
 - attachments through the Memos UI/API;
 - mobile use through web/PWA or mobile clients;
-- future Telegram bot integration.
+- Telegram bot capture for text, todos, and uploaded media links.
 
 ## Deployment
 
@@ -58,7 +58,13 @@ Database:
 
 ## Access
 
-Current LAN URL:
+Public URL:
+
+```text
+https://memos.pustelga.xyz
+```
+
+LAN URL:
 
 ```text
 http://192.168.1.42:5230
@@ -72,13 +78,19 @@ Published port:
 
 The port is bound to the VM LAN address only. It is not published as `0.0.0.0`.
 
-Planned public URL:
+Public access is handled by Caddy on the Nextcloud VM:
 
 ```text
-https://memos.pustelga.xyz
+memos.pustelga.xyz -> memos:5230
 ```
 
-DNS for `memos.pustelga.xyz` was not present when Memos was installed. Add an A record to the same public address used by `nextcloud.pustelga.xyz`, then add a Caddy reverse proxy block.
+DNS:
+
+```text
+memos.pustelga.xyz A 84.201.247.104
+```
+
+Router forwarding uses the existing public `80/443` rules to the Nextcloud VM. Do not expose port `5230` directly to the internet.
 
 ## Compose Snippet
 
@@ -114,6 +126,19 @@ Expected:
 HTTP 200
 ```
 
+HTTP check from public HTTPS:
+
+```bash
+curl -I https://memos.pustelga.xyz/
+```
+
+Caddy config validation:
+
+```bash
+cd /opt/nextcloud
+sudo docker compose exec -T caddy caddy validate --config /etc/caddy/Caddyfile
+```
+
 ## Backups
 
 Back up the whole Memos data directory:
@@ -132,17 +157,44 @@ memos_prod.db-shm
 
 For a clean SQLite backup, stop the container or use a SQLite online backup command before copying.
 
-## Telegram Bot Integration Plan
+## Telegram Bot Integration
 
-The existing Telegram bot currently saves files to Nextcloud and has a legacy Joplin queue.
+The Telegram bot saves durable files to Nextcloud and creates Memos notes through the Memos API.
 
-Possible Memos replacement flow:
+Current flow:
 
 ```text
 Telegram text -> Memos memo
-Telegram photo/file -> upload attachment -> Memos memo with attachment/link
+Telegram memo button -> next text becomes Memos memo
+Telegram photo/file -> Nextcloud upload -> Memos memo with the Nextcloud path
 Telegram todo button -> Memos memo with #todo and Markdown checkbox
 Telegram tags -> #idea, #todo, #inbox, #photo
 ```
 
-Keep Nextcloud as the durable file store for large attachments if needed, and store links in Memos.
+API base:
+
+```text
+https://memos.pustelga.xyz/api/v1
+```
+
+The bot uses a Memos personal access token created for user `serb`. The token itself is stored only on the VPS in:
+
+```text
+/etc/telegram-nextcloud-bot.env
+```
+
+Relevant env variables:
+
+```text
+MEMOS_BASE_URL=https://memos.pustelga.xyz
+MEMOS_TOKEN=redacted
+MEMOS_VISIBILITY=PRIVATE
+```
+
+Smoke test performed after deploy:
+
+```text
+Memos auth: HTTP 200
+temporary memo create/delete: HTTP 200
+Telegram menu message: sent
+```
