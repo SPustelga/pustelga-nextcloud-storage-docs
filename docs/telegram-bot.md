@@ -97,7 +97,7 @@ Memos capture:
 text -> Memos memo with #telegram #inbox
 Memo button text -> Memos memo with #telegram #memo
 Todo button text -> Memos memo with #telegram #todo and Markdown checkbox
-photo/file/media -> Memos memo with the saved Nextcloud path
+photo/file/media -> Nextcloud upload plus Memos memo with a real attachment and saved Nextcloud path
 ```
 
 Memos API base:
@@ -243,6 +243,7 @@ telegram-nextcloud-bot.service: active
 bot Python compile check: ok
 Memos auth check: HTTP 200
 temporary Memos memo create/delete: HTTP 200
+temporary Memos attachment create/delete through bot code: ok
 Telegram menu message delivery: ok
 ```
 

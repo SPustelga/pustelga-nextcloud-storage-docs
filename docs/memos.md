@@ -166,7 +166,7 @@ Current flow:
 ```text
 Telegram text -> Memos memo
 Telegram memo button -> next text becomes Memos memo
-Telegram photo/file -> Nextcloud upload -> Memos memo with the Nextcloud path
+Telegram photo/file -> Nextcloud upload -> Memos memo with attachment plus the Nextcloud path
 Telegram todo button -> Memos memo with #todo and Markdown checkbox
 Telegram tags -> #idea, #todo, #inbox, #photo
 ```
@@ -196,5 +196,6 @@ Smoke test performed after deploy:
 ```text
 Memos auth: HTTP 200
 temporary memo create/delete: HTTP 200
+temporary attachment create/delete through bot code: ok
 Telegram menu message: sent
 ```

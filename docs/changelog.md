@@ -14,6 +14,8 @@
 - Extended GIF inline buttons with `📝 Memo` and `☑️ Todo`.
 - Deployed `/opt/telegram-nextcloud-bot/bot.py`, passed `python3 -m py_compile`, restarted `telegram-nextcloud-bot.service`, and verified the service is active.
 - Smoke-tested Memos auth, temporary memo create/delete, and Telegram menu message delivery.
+- Fixed Telegram media capture so photo/file/media uploads create real Memos attachments, while still keeping the durable copy in Nextcloud.
+- Smoke-tested the deployed bot code path by creating and deleting a temporary Memos memo with one attachment.
 
 ## 2026-06-30
 
